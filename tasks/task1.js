@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 const utils = require('../utils');
 
 // Test #1 - Retrieve Workflow Params
