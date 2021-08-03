@@ -26,6 +26,7 @@ const retrieveWorkflowParameters = async () => {
 };
 
 const runEvaluation = async (params, optionalHeaders) => {
+  console.log(auth);
   const url = `${SANDBOX_DOMAIN}/${EVAL_ENDPOINT}`;
   const headers = {};
 
@@ -126,6 +127,33 @@ const getReviewsForEntity = async (entityToken) => {
   }
 };
 
+const updateEvaluation = async (params, evaluationToken, optionalHeaders) => {
+  const url = `${SANDBOX_DOMAIN}/${EVAL_ENDPOINT}/${evaluationToken}`;
+  const headers = {};
+
+  if (optionalHeaders) {
+    const {
+      entityToken, bypassCache, bypassFormatter, workflowVersion
+    } = optionalHeaders;
+
+    if (entityToken) headers['Alloy-Entity-Token'] = entityToken;
+    if (bypassCache) headers['Alloy-Refresh-Cache'] = bypassCache;
+    if (bypassFormatter) headers['Alloy-Bypass-Formatter'] = bypassFormatter;
+    if (workflowVersion) headers['Alloy-Application-Version'] = workflowVersion;
+  }
+
+  try {
+    const evaluation = await axios.patch(url, params, {
+      auth,
+      headers
+    });
+
+    return evaluation;
+  } catch (e) {
+    return e.response;
+  }
+};
+
 module.exports = {
   retrieveWorkflowParameters,
   runEvaluation,
@@ -133,5 +161,6 @@ module.exports = {
   retrieveEvaluation,
   reviewEntity,
   getReviewsForEntity,
-  uploadDocument
+  uploadDocument,
+  updateEvaluation
 };
