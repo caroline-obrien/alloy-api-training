@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 const utils = require('../utils');
 
 const params = {

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 const utils = require('../utils');
 
 const entityId = 'P-x4vtIdFD20vv6jWshIYD';
